@@ -17,4 +17,9 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="main_map_fab_spoken">Map</string>
+    <string name="main_survey_fab_spoken">Survey</string>
+    <string name="top_settings_btn_title">Settings</string>
+    <string name="mapview_spoken">Google Maps</string>
+    <string name="ok_btn">OK</string>
 </resources>
