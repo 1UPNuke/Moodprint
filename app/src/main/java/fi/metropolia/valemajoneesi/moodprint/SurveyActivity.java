@@ -17,6 +17,7 @@ public class SurveyActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                EmotionTracker.getInstance().unselectAll();
                 finish();
                 return true;
         }
@@ -41,6 +42,8 @@ public class SurveyActivity extends AppCompatActivity {
     }
 
     public void okOnClick(View view) {
+        EmotionTracker.getInstance().storeSelectedInHistory();
+
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }

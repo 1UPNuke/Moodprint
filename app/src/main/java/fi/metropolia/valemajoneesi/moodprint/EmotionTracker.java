@@ -2,17 +2,18 @@ package fi.metropolia.valemajoneesi.moodprint;
 
 import android.content.Context;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class EmotionTracker {
     private static EmotionTracker instance = null;
-    private static List<Emotion> emotions = new ArrayList<Emotion>();
-    private static List<Integer> selectedEmotions = new ArrayList<Integer>();
-    //private static Dictionary<Date, List> emotionHistory = new Dictionary<Date, List>();
+    private static List<Emotion> emotions = new ArrayList<>();
+    private static List<Integer> selectedEmotions = new ArrayList<>();
+    private static Map<LocalDateTime, List> history = new TreeMap<>();
 
     private static final Integer[] icons = {
             R.drawable.emotion_a0,
@@ -94,9 +95,17 @@ public class EmotionTracker {
             selectedEmotions.remove(selectedEmotions.indexOf(id));
         }
     }
-
     public void unselectAll() {
-        selectedEmotions = new ArrayList<Integer>();
+        selectedEmotions = new ArrayList<>();
+    }
+
+    public Map<LocalDateTime, List> getHistory() {
+        return history;
+    }
+
+    public void storeSelectedInHistory() {
+        history.put(LocalDateTime.now(), getSelected());
+        unselectAll();
     }
 
     public List<Emotion> getSelected() {
