@@ -25,6 +25,9 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
+
+        EmotionTracker.setInstance(this);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()

@@ -3,6 +3,8 @@ package fi.metropolia.valemajoneesi.moodprint;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,8 +28,16 @@ public class SurveyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
 
+        EmotionTracker.setInstance(this);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        RecyclerView rv = findViewById(R.id.RecyclerView);
+        // Attach the adapter to the recyclerview to populate items
+        rv.setAdapter(new EmotionAdapter());
+        // Set layout manager to position the items
+        rv.setLayoutManager(new GridLayoutManager(this, 5));
     }
 
     public void okOnClick(View view) {
