@@ -42,7 +42,7 @@ public class EmotionAdapter extends RecyclerView.Adapter<EmotionAdapter.ViewHold
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.emotion_grid_item, viewGroup, false);
-
+        view.getLayoutParams().height = viewGroup.getMeasuredHeight() / 5;
         return new ViewHolder(view);
     }
 
@@ -52,11 +52,11 @@ public class EmotionAdapter extends RecyclerView.Adapter<EmotionAdapter.ViewHold
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getTextView().setText(EmotionTracker.getInstance().getEmotion(i).getName());
+        viewHolder.getTextView().setText(EmotionTracker.getInstance().getDisplayEmotion(i).getName());
 
         viewHolder.getImageView().setImageDrawable(
                 viewHolder.getView().getContext().getDrawable(
-                  EmotionTracker.getInstance().getEmotion(i).getImageId()
+                  EmotionTracker.getInstance().getDisplayEmotion(i).getImageId()
                 )
         );
     }
