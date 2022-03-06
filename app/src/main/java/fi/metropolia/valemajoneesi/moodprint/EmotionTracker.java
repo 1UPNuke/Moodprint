@@ -13,7 +13,7 @@ public class EmotionTracker {
     private static EmotionTracker instance = null;
     private static List<Emotion> emotions = new ArrayList<>();
     private static List<Integer> selectedEmotions = new ArrayList<>();
-    private static Map<LocalDateTime, List> history = new TreeMap<>();
+    private static TreeMap<LocalDateTime, List> history = new TreeMap<>();
 
     private static final Integer[] icons = {
             R.drawable.emotion_a0,
@@ -102,7 +102,7 @@ public class EmotionTracker {
     public Map<LocalDateTime, List> getHistory() {
         return history;
     }
-
+    public List<Emotion> lastHistoryEntry() { return history.lastEntry().getValue(); }
     public void storeSelectedInHistory() {
         history.put(LocalDateTime.now(), getSelected());
         unselectAll();
@@ -114,5 +114,20 @@ public class EmotionTracker {
             returnList.add(getEmotion(id));
         }
         return returnList;
+    }
+
+    public static double averageEnergy(List<Emotion> emotions) {
+        double sum = 0;
+        for(Emotion emo : emotions) {
+            sum += emo.getEnergy();
+        }
+        return sum/emotions.size();
+    }
+    public static double averageMood(List<Emotion> emotions) {
+        double sum = 0;
+        for(Emotion emo : emotions) {
+            sum += emo.getMood();
+        }
+        return sum/emotions.size();
     }
 }
