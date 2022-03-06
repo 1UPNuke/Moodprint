@@ -24,4 +24,5 @@
     <string name="ok_btn">OK</string>
     <string name="title_activity_survey">Moodprint Survey</string>
     <string name="survey_question">How are you feeling?</string>
+    <string name="emotion_word">Emotion</string>
 </resources>

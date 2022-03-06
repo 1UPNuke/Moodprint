@@ -1,11 +1,16 @@
 package fi.metropolia.valemajoneesi.moodprint;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class EmotionAdapter extends RecyclerView.Adapter<EmotionAdapter.ViewHolder> {
@@ -38,11 +43,11 @@ public class EmotionAdapter extends RecyclerView.Adapter<EmotionAdapter.ViewHold
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Create a new view, which defines the UI of the list item
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.emotion_grid_item, viewGroup, false);
-        view.getLayoutParams().height = viewGroup.getMeasuredHeight() / 5;
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.emotion_grid_item, parent, false);
+        view.getLayoutParams().height = parent.getMeasuredHeight() / 5;
         return new ViewHolder(view);
     }
 
@@ -52,13 +57,32 @@ public class EmotionAdapter extends RecyclerView.Adapter<EmotionAdapter.ViewHold
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getTextView().setText(EmotionTracker.getInstance().getDisplayEmotion(i).getName());
+        viewHolder.getTextView().setText(EmotionTracker.getInstance().getEmotion(i).getName());
 
-        viewHolder.getImageView().setImageDrawable(
+        ImageView iv = viewHolder.getImageView();
+        iv.setContentDescription(EmotionTracker.getInstance().getEmotion(i).getName());
+        iv.setImageDrawable(
                 viewHolder.getView().getContext().getDrawable(
-                  EmotionTracker.getInstance().getDisplayEmotion(i).getImageId()
+                  EmotionTracker.getInstance().getEmotion(i).getImageId()
                 )
         );
+        ImageViewCompat.setImageTintList(iv, ColorStateList.valueOf(Color.rgb(128, 128, 128)));
+
+        viewHolder.getImageView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setSelected(!view.isSelected());
+                if(view.isSelected()) {
+                    EmotionTracker.getInstance().selectEmotion(i);
+                    ImageViewCompat.setImageTintList((ImageView) view, null);
+                }
+                else {
+                    EmotionTracker.getInstance().unselectEmotion(i);
+                    ImageViewCompat.setImageTintList((ImageView) view, ColorStateList.valueOf(Color.rgb(128, 128, 128)));
+                }
+                Toast.makeText(view.getContext(), EmotionTracker.getInstance().getSelected().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)

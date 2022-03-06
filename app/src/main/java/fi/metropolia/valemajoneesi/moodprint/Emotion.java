@@ -28,4 +28,9 @@ public class Emotion {
     public int getImageId() {
         return imageId;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
