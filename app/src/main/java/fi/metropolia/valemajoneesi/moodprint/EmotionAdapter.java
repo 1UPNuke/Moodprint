@@ -73,11 +73,11 @@ public class EmotionAdapter extends RecyclerView.Adapter<EmotionAdapter.ViewHold
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()) {
                     EmotionTracker.getInstance().selectEmotion(i);
-                    ImageViewCompat.setImageTintList((ImageView) view, null);
+                    view.setAlpha(1f);
                 }
                 else {
                     EmotionTracker.getInstance().unselectEmotion(i);
-                    ImageViewCompat.setImageTintList((ImageView) view, ColorStateList.valueOf(Color.rgb(128, 128, 128)));
+                    view.setAlpha(0.5f);
                 }
             }
         });
