@@ -1,28 +1,25 @@
 <resources>
     <string name="app_name">Moodprint</string>
+
     <string name="title_activity_settings">Moodprint Settings</string>
+    <string name="title_activity_maps">Moodprint Map</string>
+    <string name="title_activity_survey">Moodprint Survey</string>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="interface_header">Interface</string>
+    <string name="notif_header">Notifications</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <!-- Preferences -->
+    <string name="force_dark">Force enable dark mode</string>
+    <string name="force_light">Force enable light mode</string>
+    <string name="receive_notifs">Receive notifications</string>
+    <string name="notif_frequency">Notification frequency</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="title_activity_maps">Moodprint Map</string>
     <string name="main_map_fab_spoken">Map</string>
     <string name="main_survey_fab_spoken">Survey</string>
     <string name="top_settings_btn_title">Settings</string>
     <string name="mapview_spoken">Google Maps</string>
     <string name="ok_btn">OK</string>
-    <string name="title_activity_survey">Moodprint Survey</string>
     <string name="survey_question">How are you feeling?</string>
     <string name="emotion_word">Emotion</string>
     <string name="energy_history_text">Energy History:</string>
