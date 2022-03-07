@@ -2,7 +2,13 @@ package fi.metropolia.valemajoneesi.moodprint;
 
 import android.content.Context;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +19,7 @@ public class EmotionTracker {
     private static EmotionTracker instance = null;
     private static List<Emotion> emotions = new ArrayList<>();
     private static List<Integer> selectedEmotions = new ArrayList<>();
-    private static TreeMap<LocalDateTime, List> history = new TreeMap<>();
+    private static TreeMap<Long, List> history = new TreeMap<>();
 
     private static final Integer[] icons = {
             R.drawable.emotion_a0,
@@ -99,12 +105,12 @@ public class EmotionTracker {
         selectedEmotions = new ArrayList<>();
     }
 
-    public Map<LocalDateTime, List> getHistory() {
+    public Map<Long, List> getHistory() {
         return history;
     }
     public List<Emotion> lastHistoryEntry() { return history.lastEntry().getValue(); }
     public void storeSelectedInHistory() {
-        history.put(LocalDateTime.now(), getSelected());
+        history.put(LocalDateTime.now().toInstant(ZoneOffset.UTC).getEpochSecond(), getSelected());
         unselectAll();
     }
 
@@ -130,5 +136,31 @@ public class EmotionTracker {
             sum += emo.getMood();
         }
         return sum/emotions.size();
+    }
+
+    public void saveHistory(Context ctx) {
+        try {
+            File file = new File(ctx.getFilesDir(), "history");
+            // create a new file with an ObjectOutputStream
+            FileOutputStream out = new FileOutputStream(file);
+            ObjectOutputStream oout = new ObjectOutputStream(out);
+
+            // write something in the file
+            oout.writeObject(getHistory());
+            oout.flush();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void loadHistory(Context ctx) {
+        try {
+            File file = new File(ctx.getFilesDir(), "history");
+            // create an ObjectInputStream for the file we created before
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+            history = (TreeMap<Long, List>) ois.readObject();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

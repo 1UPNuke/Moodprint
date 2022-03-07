@@ -43,7 +43,7 @@ public class SurveyActivity extends AppCompatActivity {
 
     public void okOnClick(View view) {
         EmotionTracker.getInstance().storeSelectedInHistory();
-
+        EmotionTracker.getInstance().saveHistory(this);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

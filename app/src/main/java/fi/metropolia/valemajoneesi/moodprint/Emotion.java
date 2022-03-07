@@ -1,6 +1,8 @@
 package fi.metropolia.valemajoneesi.moodprint;
 
-public class Emotion {
+import java.io.Serializable;
+
+public class Emotion implements Serializable {
     private String name = "neutral";
     private int mood = 0;
     private int energy = 0;

@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
         EmotionTracker.setInstance(this);
 
+        EmotionTracker.getInstance().loadHistory(this);
+
         GraphView enrgGraph = (GraphView) findViewById(R.id.energyGraph);
         GraphView moodGraph = (GraphView) findViewById(R.id.moodGraph);
 
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         double i = 0;
         if(!(EmotionTracker.getInstance().getEmotions().size() < 1)) {
-            Set<Map.Entry<LocalDateTime, List>> hist;
+            Set<Map.Entry<Long, List>> hist;
             hist = EmotionTracker.getInstance().getHistory().entrySet();
 
             LineGraphSeries<DataPoint> enrgSeries = new LineGraphSeries<DataPoint>();
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             moodSeries.setDrawDataPoints(true);
             moodSeries.setDataPointsRadius(10);
 
-            for(Map.Entry<LocalDateTime, List> entry : hist) {
+            for(Map.Entry<Long, List> entry : hist) {
                 double energy = EmotionTracker.averageEnergy(entry.getValue());
                 enrgSeries.appendData(new DataPoint(i, energy), true, 50);
 
