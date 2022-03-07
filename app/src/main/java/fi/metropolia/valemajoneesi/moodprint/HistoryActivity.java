@@ -41,6 +41,8 @@ public class HistoryActivity extends AppCompatActivity {
             //A list of emotions chosen in a survey
             for(Emotion emotion : surveyAnswer) {
                 //Individual emotion
+                //Get name of emotion
+                String emoName = emotion.getName();
             }
         }
     }
