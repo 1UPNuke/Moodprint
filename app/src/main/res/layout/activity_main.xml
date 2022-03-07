@@ -76,6 +76,7 @@
         android:layout_width="53dp"
         android:layout_height="47dp"
         android:layout_marginBottom="16dp"
+        android:contentDescription="@string/moodprint_logo_desc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

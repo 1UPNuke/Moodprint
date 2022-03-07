@@ -7,11 +7,6 @@ android {
     compileSdk 32
 
     defaultConfig {
-        def Properties properties = new Properties()
-        properties.load(project.rootProject.file("local.properties").newDataInputStream())
-
-        resValue "string", "MAPS_API_KEY", properties.getProperty("MAPS_API_KEY", "")
-
         applicationId "fi.metropolia.valemajoneesi.moodprint"
         minSdk 30
         targetSdk 32
@@ -19,9 +14,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        properties.load(project.rootProject.file('local.properties').newDataInputStream())
-        manifestPlaceholders = [MAPS_API_KEY: "${properties.getProperty('MAPS_API_KEY')}"]
     }
 
     buildTypes {
