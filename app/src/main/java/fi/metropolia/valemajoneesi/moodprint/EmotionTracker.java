@@ -44,19 +44,19 @@ public class EmotionTracker {
     };
 
     public EmotionTracker(Context ctx) {
-        char[] chars = "abcde".toCharArray();
-        //Really hacky solution to display emotions in the correct order
-        for(int mood = 4; mood >= 0; mood--) {
-            char ch = chars[mood];
-            for(int enrg = 4; enrg >= 0; enrg--) {
-                int i = 5*enrg + mood;
+        int i = 0;
+        for(int mood = 0; mood < 5; mood++) {
+            for(int enrg = 0; enrg < 5; enrg++) {
                 emotions.add(new Emotion(
                         ctx.getResources().getStringArray(R.array.emotions)[i],
                         mood-2, enrg, icons[i]
                 ));
+                i++;
             }
         }
-        for ( int i = 0; i < 3; i++ ) {
+        //Really hacky solution to display emotions in the correct order
+        //Reverse columns
+        for (i = 0; i < 3; i++ ) {
             int k = 4 - i;
             for ( int j = 0; j < 5; ++j ) {
                 Emotion temp = emotions.get(i * 5 + j);
@@ -123,6 +123,7 @@ public class EmotionTracker {
         }
         return sum/emotions.size();
     }
+
     public static double averageMood(List<Emotion> emotions) {
         double sum = 0;
         for(Emotion emo : emotions) {

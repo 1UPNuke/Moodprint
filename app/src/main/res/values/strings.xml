@@ -25,4 +25,6 @@
     <string name="title_activity_survey">Moodprint Survey</string>
     <string name="survey_question">How are you feeling?</string>
     <string name="emotion_word">Emotion</string>
+    <string name="energy_history_text">Energy History:</string>
+    <string name="mood_history_text">Mood History:</string>
 </resources>
