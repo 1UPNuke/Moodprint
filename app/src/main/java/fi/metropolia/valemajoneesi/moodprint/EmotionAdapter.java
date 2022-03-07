@@ -65,8 +65,7 @@ public class EmotionAdapter extends RecyclerView.Adapter<EmotionAdapter.ViewHold
                   EmotionTracker.getInstance().getEmotion(i).getImageId()
                 )
         );
-        ImageViewCompat.setImageTintList(iv, ColorStateList.valueOf(Color.rgb(128, 128, 128)));
-
+        iv.setAlpha(0.5f);
         viewHolder.getImageView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

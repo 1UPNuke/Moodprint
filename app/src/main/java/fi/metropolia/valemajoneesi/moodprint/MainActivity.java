@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             hist = EmotionTracker.getInstance().getHistory().entrySet();
 
             LineGraphSeries<DataPoint> enrgSeries = new LineGraphSeries<DataPoint>();
-            enrgSeries.setColor(Color.YELLOW);
+            enrgSeries.setColor(getColor(R.color.energy_yellow));
             enrgSeries.setDrawDataPoints(true);
             enrgSeries.setDataPointsRadius(10);
 

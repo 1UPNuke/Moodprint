@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/emotion_word"
-        android:tintMode="multiply"
         app:srcCompat="@drawable/emotion_a0"
         tools:ignore="ImageContrastCheck" />
 
