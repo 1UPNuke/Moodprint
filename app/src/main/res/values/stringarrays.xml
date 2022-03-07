@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="emotions">
-        <item>neutral1</item>
-        <item>neutral2</item>
-        <item>neutral3</item>
-        <item>neutral4</item>
-        <item>neutral5</item>
-        <item>neutral6</item>
-        <item>neutral7</item>
-        <item>neutral8</item>
-        <item>neutral9</item>
-        <item>neutral10</item>
-        <item>neutral11</item>
-        <item>neutral12</item>
-        <item>neutral13</item>
-        <item>neutral14</item>
-        <item>neutral15</item>
-        <item>neutral16</item>
-        <item>neutral17</item>
-        <item>neutral18</item>
-        <item>neutral19</item>
-        <item>neutral20</item>
-        <item>neutral21</item>
-        <item>neutral22</item>
-        <item>neutral23</item>
-        <item>neutral24</item>
-        <item>neutral25</item>
+        <item>Crushed</item>
+        <item>Sad</item>
+        <item>Nauseous</item>
+        <item>Cranky</item>
+        <item>Furious</item>
+        <item>Drained</item>
+        <item>Disappointed</item>
+        <item>Disgusted</item>
+        <item>Worried</item>
+        <item>Stressed</item>
+        <item>Tired</item>
+        <item>Bored</item>
+        <item>Neutral</item>
+        <item>Amazed</item>
+        <item>Surprised</item>
+        <item>Relieved</item>
+        <item>Playful</item>
+        <item>Content</item>
+        <item>Amused</item>
+        <item>Celebratory</item>
+        <item>Blissful</item>
+        <item>Relaxed</item>
+        <item>Joyful</item>
+        <item>Excited</item>
+        <item>Ecstatic</item>
     </string-array>
 </resources>
