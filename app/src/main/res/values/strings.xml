@@ -2,8 +2,8 @@
     <string name="app_name">Moodprint</string>
 
     <string name="title_activity_settings">Moodprint Settings</string>
-    <string name="title_activity_maps">Moodprint Map</string>
     <string name="title_activity_survey">Moodprint Survey</string>
+    <string name="title_activity_history">Moodprint History</string>
 
     <!-- Preference Titles -->
     <string name="interface_header">Interface</string>
@@ -15,10 +15,9 @@
     <string name="receive_notifs">Receive notifications</string>
     <string name="notif_frequency">Notification frequency</string>
 
-    <string name="main_map_fab_spoken">Map</string>
+    <string name="main_history_fab_spoken">History</string>
     <string name="main_survey_fab_spoken">Survey</string>
     <string name="top_settings_btn_title">Settings</string>
-    <string name="mapview_spoken">Google Maps</string>
     <string name="ok_btn">OK</string>
     <string name="survey_question">How are you feeling?</string>
     <string name="emotion_word">Emotion</string>

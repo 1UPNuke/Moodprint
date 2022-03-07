@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void historyOnClick(View view) {
-        /*Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);*/
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
     }
 
     public void surveyOnClick(View view) {

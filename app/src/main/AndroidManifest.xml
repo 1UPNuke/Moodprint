@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fi.metropolia.valemajoneesi.moodprint" >
+    package="fi.metropolia.valemajoneesi.moodprint">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Moodprint"
-        >
-
+        android:theme="@style/Theme.Moodprint">
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false"
+            android:label="@string/title_activity_history" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
@@ -20,7 +22,7 @@
             android:label="@string/title_activity_survey" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

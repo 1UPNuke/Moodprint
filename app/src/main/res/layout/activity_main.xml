@@ -23,6 +23,23 @@
         app:srcCompat="@drawable/smile_plus"
         app:tint="@color/white" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@android:color/holo_purple"
+        android:clickable="true"
+        android:contentDescription="@string/main_history_fab_spoken"
+        android:focusable="true"
+        android:onClick="historyOnClick"
+        app:backgroundTint="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/history"
+        app:tint="@color/white" />
+
     <com.jjoe64.graphview.GraphView
         android:id="@+id/energyGraph"
         android:layout_width="match_parent"
