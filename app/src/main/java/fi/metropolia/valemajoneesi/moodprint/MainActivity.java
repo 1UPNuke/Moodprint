@@ -3,37 +3,31 @@ package fi.metropolia.valemajoneesi.moodprint;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Make settings icon
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.top_menu, menu);
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle back button
         switch (item.getItemId()) {
             case R.id.settingsButton:
                 Intent intent = new Intent(this, SettingsActivity.class);
@@ -48,13 +42,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EmotionTracker.setInstance(this);
+        EmotionTracker.initialize(this);
 
-        EmotionTracker.getInstance().loadHistory(this);
+        EmotionTracker.loadHistory(this);
 
         GraphView enrgGraph = (GraphView) findViewById(R.id.energyGraph);
         GraphView moodGraph = (GraphView) findViewById(R.id.moodGraph);
 
+        // Set GraphView styling
         enrgGraph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
         moodGraph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
 
@@ -68,11 +63,13 @@ public class MainActivity extends AppCompatActivity {
         moodGraph.getViewport().setMaxY(2);
         moodGraph.getViewport().setScrollable(true);
 
-        double i = 0;
-        if(!(EmotionTracker.getInstance().getEmotions().size() < 1)) {
+        // If there are emotions in history then draw graphs
+        if(!(EmotionTracker.getEmotions().size() < 1)) {
+            // Get history
             Set<Map.Entry<Long, List>> hist;
-            hist = EmotionTracker.getInstance().getHistory().entrySet();
+            hist = EmotionTracker.getHistory().entrySet();
 
+            // Define series and their styles
             LineGraphSeries<DataPoint> enrgSeries = new LineGraphSeries<DataPoint>();
             enrgSeries.setColor(getColor(R.color.energy_yellow));
             enrgSeries.setDrawDataPoints(true);
@@ -82,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
             moodSeries.setDrawDataPoints(true);
             moodSeries.setDataPointsRadius(10);
 
+            // Add data points to series
+            double i = 0;
             for(Map.Entry<Long, List> entry : hist) {
                 double energy = EmotionTracker.averageEnergy(entry.getValue());
                 enrgSeries.appendData(new DataPoint(i, energy), true, 50);
@@ -89,11 +88,10 @@ public class MainActivity extends AppCompatActivity {
                 double mood = EmotionTracker.averageMood(entry.getValue());
                 moodSeries.appendData(new DataPoint(i, mood), true, 50);
 
-                Log.d("TAG", "Energy: "+energy+" Mood: "+mood+" i: "+i);
-
                 i++;
             }
 
+            //Display series and scroll graphs to the end
             enrgGraph.addSeries(enrgSeries);
             moodGraph.addSeries(moodSeries);
 

@@ -1,15 +1,11 @@
 package fi.metropolia.valemajoneesi.moodprint;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class EmotionAdapter extends RecyclerView.Adapter<EmotionAdapter.ViewHolder> {
@@ -56,13 +52,13 @@ public class EmotionAdapter extends RecyclerView.Adapter<EmotionAdapter.ViewHold
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getTextView().setText(EmotionTracker.getInstance().getEmotion(i).getName());
+        viewHolder.getTextView().setText(EmotionTracker.getEmotion(i).getName());
 
         ImageView iv = viewHolder.getImageView();
-        iv.setContentDescription(EmotionTracker.getInstance().getEmotion(i).getName());
+        iv.setContentDescription(EmotionTracker.getEmotion(i).getName());
         iv.setImageDrawable(
                 viewHolder.getView().getContext().getDrawable(
-                  EmotionTracker.getInstance().getEmotion(i).getImageId()
+                  EmotionTracker.getEmotion(i).getImageId()
                 )
         );
         iv.setAlpha(0.5f);
@@ -70,12 +66,13 @@ public class EmotionAdapter extends RecyclerView.Adapter<EmotionAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 view.setSelected(!view.isSelected());
+                // If selected highlight and save the selection
                 if(view.isSelected()) {
-                    EmotionTracker.getInstance().selectEmotion(i);
+                    EmotionTracker.selectEmotion(i);
                     view.setAlpha(1f);
                 }
                 else {
-                    EmotionTracker.getInstance().unselectEmotion(i);
+                    EmotionTracker.unselectEmotion(i);
                     view.setAlpha(0.5f);
                 }
             }
@@ -85,6 +82,6 @@ public class EmotionAdapter extends RecyclerView.Adapter<EmotionAdapter.ViewHold
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return EmotionTracker.getInstance().getEmotions().size();
+        return EmotionTracker.getEmotions().size();
     }
 }

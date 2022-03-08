@@ -10,17 +10,17 @@ import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class EmotionTracker {
-    private static EmotionTracker instance = null;
     private static List<Emotion> emotions = new ArrayList<>();
     private static List<Integer> selectedEmotions = new ArrayList<>();
     private static TreeMap<Long, List> history = new TreeMap<>();
+    private static boolean initialized = false;
 
+    // I wish there was a better way to do this
     private static final Integer[] icons = {
             R.drawable.emotion_a0,
             R.drawable.emotion_a1,
@@ -49,7 +49,12 @@ public class EmotionTracker {
             R.drawable.emotion_e4
     };
 
-    public EmotionTracker(Context ctx) {
+    public static void initialize(Context ctx) {
+        if(initialized) {
+            return;
+        }
+        initialized = true;
+        //Build emotion array with mood from -2 to 2 and energy from 0 to 5
         int i = 0;
         for(int mood = 0; mood < 5; mood++) {
             for(int enrg = 0; enrg < 5; enrg++) {
@@ -60,8 +65,8 @@ public class EmotionTracker {
                 i++;
             }
         }
-        //Really hacky solution to display emotions in the correct order
-        //Reverse columns
+        // Really hacky solution to display emotions in the correct order
+        // Reverse columns
         for (i = 0; i < 3; i++ ) {
             int k = 4 - i;
             for ( int j = 0; j < 5; ++j ) {
@@ -72,49 +77,38 @@ public class EmotionTracker {
         }
     }
 
-    public static EmotionTracker getInstance() {
-        return instance;
-    }
-
-    public static void setInstance(Context ctx) {
-        if(instance == null) {
-            instance = new EmotionTracker(ctx);
-        }
-    }
-
-    public List<Emotion> getEmotions() {
+    public static List<Emotion> getEmotions() {
         return emotions;
     }
 
-    public Emotion getEmotion(int index) {
+    public static Emotion getEmotion(int index) {
         return emotions.get(index);
     }
 
-    public void selectEmotion(int id) {
+    public static void selectEmotion(int id) {
         if(!selectedEmotions.contains(id)) {
             selectedEmotions.add(id);
         }
     }
 
-    public void unselectEmotion(int id) {
+    public static void unselectEmotion(int id) {
         if(selectedEmotions.contains(id)) {
             selectedEmotions.remove(selectedEmotions.indexOf(id));
         }
     }
-    public void unselectAll() {
+    public static void unselectAll() {
         selectedEmotions = new ArrayList<>();
     }
 
-    public Map<Long, List> getHistory() {
+    public static Map<Long, List> getHistory() {
         return history;
     }
-    public List<Emotion> lastHistoryEntry() { return history.lastEntry().getValue(); }
-    public void storeSelectedInHistory() {
+    public static void storeSelectedInHistory() {
         history.put(LocalDateTime.now().toInstant(ZoneOffset.UTC).getEpochSecond(), getSelected());
         unselectAll();
     }
 
-    public List<Emotion> getSelected() {
+    public static List<Emotion> getSelected() {
         List<Emotion> returnList = new ArrayList<Emotion>();
         for(int id : selectedEmotions) {
             returnList.add(getEmotion(id));
@@ -138,7 +132,7 @@ public class EmotionTracker {
         return sum/emotions.size();
     }
 
-    public void saveHistory(Context ctx) {
+    public static void saveHistory(Context ctx) {
         try {
             File file = new File(ctx.getFilesDir(), "history");
             // create a new file with an ObjectOutputStream
@@ -153,7 +147,7 @@ public class EmotionTracker {
         }
     }
 
-    public void loadHistory(Context ctx) {
+    public static void loadHistory(Context ctx) {
         try {
             File file = new File(ctx.getFilesDir(), "history");
             // create an ObjectInputStream for the file we created before

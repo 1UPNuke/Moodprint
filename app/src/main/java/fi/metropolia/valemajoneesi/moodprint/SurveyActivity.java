@@ -15,9 +15,10 @@ public class SurveyActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle back button
         switch (item.getItemId()) {
             case android.R.id.home:
-                EmotionTracker.getInstance().unselectAll();
+                EmotionTracker.unselectAll();
                 finish();
                 return true;
         }
@@ -29,8 +30,9 @@ public class SurveyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
 
-        EmotionTracker.setInstance(this);
+        EmotionTracker.initialize(this);
 
+        // Set back button
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -42,8 +44,8 @@ public class SurveyActivity extends AppCompatActivity {
     }
 
     public void okOnClick(View view) {
-        EmotionTracker.getInstance().storeSelectedInHistory();
-        EmotionTracker.getInstance().saveHistory(this);
+        EmotionTracker.storeSelectedInHistory();
+        EmotionTracker.saveHistory(this);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
